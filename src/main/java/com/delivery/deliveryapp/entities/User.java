@@ -1,8 +1,11 @@
 package com.delivery.deliveryapp.entities;
 
+import ch.qos.logback.core.net.server.Client;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +19,11 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String phone;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<Order>();
+
+
 
     public User() {
     }
@@ -67,6 +75,12 @@ public class User implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
